@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# 定义 API 认证参数
+# summary: Convert all MP3 files in a directory to text using OpenAI's API
+
+# Define API authentication parameters
 API_KEY="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"
 
 # PROMPT
@@ -9,25 +11,25 @@ PROMPT="给输出的文字增加标点符号，分成几个段落，并且在最
 # Model
 MODEL="whisper-1"
 
-# 语言
+# Language
 LANGUAGE="zh"
 
-# 定义输入和输出目录
+# Define input and output directories
 INPUT_DIR="./mp3"
 OUTPUT_DIR="./text"
 
-# 如果输出目录不存在，就创建它
+# If the output directory does not exist, create it.
 if [ ! -d $OUTPUT_DIR ]; then
   mkdir -p $OUTPUT_DIR
 fi
 
-# 循环处理输入目录下的所有 MP3 文件
+# Loop through all MP3 files in the input directory
 for file in $INPUT_DIR/*.mp3; do
   echo "Converting $file ..."
   
-  # 从文件名中提取出不带扩展名的文件名
+  # Extract the filename without extension from the file name
   filename=$(basename "$file" .mp3)
-  # 定义输出文件路径
+  # Define the output file path
   output_file="$OUTPUT_DIR/$filename.txt"
 
   # Call the OpenAI API to transcribe the audio file
@@ -41,6 +43,6 @@ for file in $INPUT_DIR/*.mp3; do
   # Output the transcription to the output file
   echo "$filename: $transcription" >> "$output_file"
 
-  # 输出转换完成的文件名
+  # Output the name of the converted file
   echo "Converted $file to $output_file"
 done
