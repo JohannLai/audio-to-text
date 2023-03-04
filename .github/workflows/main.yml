@@ -1,12 +1,14 @@
-name: Main
-on:
-  push:
-    branches:
-      - main
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: run make start
-        run: make start
+# name: Main
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: run make start
+#         env:
+#           API_KEY: ${{ secrets.API_KEY }}
+#         run: make start
