@@ -9,5 +9,4 @@ RUN apk add --no-cache \
   pip3 install you-get && \
   rm -rf /var/cache/apk/*
 
-
 CMD ["/bin/sh"]
