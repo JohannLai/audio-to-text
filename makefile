@@ -5,9 +5,18 @@ SETUP_CMD = ./script/setup.sh
 CONVERT_CMD = ./script/ffmpeg_convert_to_mp3.sh
 MP3_TO_TEXT_CMD = ./script/mp3_to_text.sh
 SUMMARIZE_CMD = ./script/summarize_and_format.sh
+ISSUE_CMD = ./script/get_info_from_issue.sh
+COMMENT_CMD = ./script/comment.sh
 
-# run setup、 download、 convert、 mp3_to_text
 start:
+	$(SETUP_CMD)
+	$(DOWNLOAD_CMD)
+	$(CONVERT_CMD)
+	$(MP3_TO_TEXT_CMD)
+	$(SUMMARIZE_CMD)
+
+start_from_issue:
+	$(ISSUE_CMD)
 	$(SETUP_CMD)
 	$(DOWNLOAD_CMD)
 	$(CONVERT_CMD)
@@ -37,6 +46,14 @@ mp3_to_text:
 # Summarize all audios
 summarize:
 	$(SUMMARIZE_CMD)
+
+# Comment on issue
+comment:
+	$(COMMENT_CMD)
+
+# Issue
+issue:
+	$(ISSUE_CMD)
 
 # Reset all audios
 reset:

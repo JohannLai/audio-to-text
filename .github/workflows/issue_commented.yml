@@ -1,0 +1,39 @@
+name: Comment on issue
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  audio-to-text:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: if the comment is bot or johannlai, exit 78
+        run: |
+          if [[ "${{ github.event.comment.user.login }}" == "github-actions[bot]" ]]; then
+            exit 78
+          fi
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          repository: johannlai/audio-to-text
+          token: ${{ secrets.ACTIONS_SECRET }}
+      - name: use chatgpt to chat
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          echo "${{ github.event.comment.body }}" > comment.txt
+          make comment
+      - name: comment to issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const commentOutput = fs.readFileSync('comment_result.txt', 'utf8');
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: commentOutput
+            })

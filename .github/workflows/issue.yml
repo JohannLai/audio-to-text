@@ -1,4 +1,4 @@
-name: ISSUE EVENT
+name: Opened or edited issue
 on:
   issues:
     types: [opened, edited]
@@ -9,10 +9,17 @@ jobs:
     permissions:
       issues: write
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          repository: johannlai/audio-to-text
+          token: ${{ secrets.ACTIONS_SECRET }}
       - name: View issue information
         run: |
           echo "Issue title: ${{ github.event.issue.title }}"
           echo "Issue body: ${{ github.event.issue.body }}"
+          echo "${{ github.event.issue.title }} ${{ github.event.issue.body }}" > issue.txt
+          cat issue.txt
       - uses: actions/github-script@v6
         with:
           script: |
@@ -20,5 +27,90 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
+              body: `
+              Hi there! 👋
+
+              Thanks for reaching out! 🤖 I've received your request and I'm currently working on it. 
+              
+              ⚙️ It might take a few minutes, so please bear with me. 🙏 You can check the progress [here](https://github.com/JohannLai/audio-to-text/actions/workflows/issue.yml)
+              
+              In the meantime, feel free to grab a cup of coffee ☕️ or take a quick break. 
+              
+              I'll notify you as soon as I'm done! 😊
+              
+              If you find my services helpful, you can support me by buying me a coffee ☕️ using the following button:
+
+              [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/johannli)
+
+              Thanks for using my services! 🤖❤️
+              `
+            })
+      - name: start audio-to-text
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          make start_from_issue
+      - name: if run failed, comment to issue
+        if: ${{ failure() }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+              Hi there! 👋
+
+              I'm sorry to inform you that I've encountered an error while processing your request. 😢
+
+              Please try again later. 🙏
+
+              Thanks for using my services! 🤖❤️
+              `
+            })
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+              Hi there! 👋
+
+              I've finished processing your request! 🤖
+
+              Here's the result:
+              `
+            })
+
+            const files = fs.readdirSync(path.join(__dirname, 'text_formatted'));
+
+            files.map(file => {
+                  let content = fs.readFileSync(path.join(__dirname, 'text_formatted', file), 'utf8');
+                  github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: content
+                })
+            }
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+              👋
+
+              If you find my services helpful, you can support me by buying me a coffee ☕️ using the following button:
+
+              [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/johannli)
+
+              Thanks for using my services! 🤖❤️
+              `
             })
