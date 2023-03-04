@@ -19,7 +19,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: johannlai/audio-to-text:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/audio-to-text:latest
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
