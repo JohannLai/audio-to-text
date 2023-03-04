@@ -1,6 +1,6 @@
 # ChatGPT Audio-to-Text 
 
-This project is a shell script implementation of the ChatGPT API to convert audio to text. It is licensed under the MIT License.
+This project is a shell script implementation of the ChatGPT API to convert audio to text. 
 
 ## Play with Issue
 

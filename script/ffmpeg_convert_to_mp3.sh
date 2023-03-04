@@ -16,13 +16,6 @@ for audio_file in ./audio/*; do
         continue
     fi
 
-    # Determine whether the current file can be converted by ffmpeg. If not, skip it
-    ffmpeg -i "$audio_file" -vn -acodec libmp3lame -ab 192k -ar 44100 -f mp3 /dev/null 2>&1
-    if [ $? -ne 0 ]; then
-        echo "File $audio_file cannot be converted, skipping ..."
-        continue
-    fi
-
     filename_without_extension="${filename%.*}"
     output_file="./mp3/${filename_without_extension}.mp3"
 
@@ -33,8 +26,16 @@ for audio_file in ./audio/*; do
     # -vn: Only extract audio stream, without audio stream;
     # -acodec libmp3lame: Set audio encoder to libmp3lame;
     # -ar 44100: Set audio sampling rate to 44100 Hz;
-    # -ab 192k: Set audio bitrate to 192 kbps;
+    # -ab 192k: Set audio bitrate to 128 kbps;
     # -f mp3: Set output format to MP3.
 
-    ffmpeg -i "$audio_file" -vn -acodec libmp3lame -ab 192k -ar 44100 "$output_file"
+    ffmpeg -i "$audio_file" -vn -acodec libmp3lame -ab 128k -ar 44100 "$output_file" 2>&1
+    if [[ "$ffmpeg_output" == *"Invalid data found when processing input"* ]]; then
+      # The file cannot be converted to MP3
+      echo "The file $input_file cannot be converted to MP3"
+    else
+      # The file can be converted to MP3
+      echo "The file $input_file can be converted to MP3"
+    fi
+
 done
