@@ -75,13 +75,10 @@ jobs:
               Thanks for using my services! 🤖❤️
               `
             })
-      - uses: actions/github-script@v6
+      - name: if run success, comment to issue
+        uses: actions/github-script@v6
         with:
           script: |
-            const fs = require('fs');
-            const path = require('path');
-            const __dirname = path.resolve();
-
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -94,19 +91,27 @@ jobs:
               Here's the result:
               `
             })
-
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const __dirname = path.resolve();
             const files = fs.readdirSync(path.join(__dirname, 'text_formatted'));
 
             files.map(file => {
                   let content = fs.readFileSync(path.join(__dirname, 'text_formatted', file), 'utf8');
                   github.rest.issues.createComment({
-                  issue_number: context.issue.number,
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  body: content
+                    issue_number: context.issue.number,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    body: content
                 })
             })
-
+      - name: end with coffee
+        uses: actions/github-script@v6
+        with:
+          script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,

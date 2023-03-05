@@ -64,6 +64,7 @@ for file in $INPUT_DIR/*.txt; do
   fi
   
   # Append the completion to the output file
+  echo "## Summary Text" >> "$OUTPUT_DIR/$filename.txt"
   echo "$completion" >> "$OUTPUT_DIR/$filename.txt"
   echo "" >> "$OUTPUT_DIR/$filename.txt"
   echo "## Original text" >> "$OUTPUT_DIR/$filename.txt"
