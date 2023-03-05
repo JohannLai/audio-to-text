@@ -40,6 +40,12 @@ echo "response: $response"
 # Parse the response result returned by the API
 audio_url=$(echo "$response" | jq -r '.choices[].message.content' | tr -d '"')
 
+# if audio_url is empty or "null" string, exit
+if [[ -z $audio_url || $audio_url == "null" ]]; then
+  echo "audio_url is empty. Exiting.."
+  exit 1 
+fi
+
 # write audio links to audios_list.txt
 echo "$audio_url" > audios_list.txt
 echo "" >> audios_list.txt

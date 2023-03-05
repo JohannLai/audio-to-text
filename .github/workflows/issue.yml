@@ -35,7 +35,7 @@ jobs:
 
               Thanks for using my services! 🤖❤️! 🤖 I've received your request and I'm currently working on it.
 
-              I'll be processing the following text:
+              I'll be processing the following link:
               \`\`\`shell
               ${issueOutput}
               \`\`\`
