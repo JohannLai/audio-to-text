@@ -7,6 +7,6 @@ assignees: ''
 
 ---
 
-🎬  Feel free to fill in the text with a video link and publish it here. 💻
+<!-- 🎬  Feel free to fill in the text with a video link and publish it here. 💻
 
-Note: Don't forget to delete this line before submitting. 🚫
+Note: Don't forget to delete this line before submitting. 🚫 -->
