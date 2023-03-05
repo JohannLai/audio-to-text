@@ -81,6 +81,13 @@ jobs:
               Thanks for using my services! 🤖❤️
               `
             })
+
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["fail"]
+            })
       - name: if run success, comment to issue
         uses: actions/github-script@v6
         with:
@@ -132,4 +139,26 @@ jobs:
 
               Thanks for using my services! 🤖❤️
               `
+            })
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+              👋
+
+              If you find my services helpful, you can support me by buying me a coffee ☕️ using the following button:
+
+              [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/johannli)
+
+              Thanks for using my services! 🤖❤️
+              `
+            })
+
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["success"]
             })
