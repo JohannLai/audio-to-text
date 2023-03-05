@@ -101,6 +101,7 @@ jobs:
 
             files.map(file => {
                   let content = fs.readFileSync(path.join(__dirname, 'text_formatted', file), 'utf8');
+                  if (!content) return;
                   github.rest.issues.createComment({
                     issue_number: context.issue.number,
                     owner: context.repo.owner,
