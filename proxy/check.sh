@@ -1,7 +1,8 @@
 #!/bin/bash
 
 function check {
-  domain=$1
+  # get dommain name from url and remove www
+  domain=$(echo $1 | sed -e 's/https\?:\/\///' -e 's/www\.//')
 
   whois_info=$(whois $domain)
 

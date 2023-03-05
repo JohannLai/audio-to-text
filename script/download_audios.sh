@@ -6,7 +6,7 @@ source ./proxy/check.sh
 
 # download function
 function download() {
-    echo "Checking proxy ..."
+    echo "Checking proxy ... for $1"
 
     if [[ $(check $1) == 1 ]]; then
         echo "Using proxy c..."

@@ -3,7 +3,7 @@
 load check.sh
 
 @test "check domain 0" {
-  run check "bilibili.com"
+  run check "www.bilibili.com"
   [ "$status" -eq 1 ]
 }
 
