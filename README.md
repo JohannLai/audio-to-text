@@ -1,7 +1,6 @@
 # ChatGPT Audio link to text and summary
 
-
-This project is a shell script implementation of the ChatGPT API to convert audio to text and summary **just need to input the audio link**.
+Convert audio to text and summary **just need to input the audio link**.
 
 ## Play with Issue
 

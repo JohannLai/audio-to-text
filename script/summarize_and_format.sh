@@ -53,9 +53,6 @@ for file in $INPUT_DIR/*.txt; do
 
   echo $response
     
-  # Extract the completion from the response
-  completion=$(echo "$response" | jq -r '.choices[].message.content')
-
   # if error, print the  contents of the file
   if [[ $response == *"error"* ]]; then
     echo "## Original text" >> "$OUTPUT_DIR/$filename.txt"
@@ -64,6 +61,9 @@ for file in $INPUT_DIR/*.txt; do
     echo "Error: $response" >> "$OUTPUT_DIR/$filename.txt"
     exit 1
   fi
+
+  # Extract the completion from the response
+  completion=$(echo "$response" | jq -r '.choices[].message.content')
   
   # Append the completion to the output file
   echo "## Summary Text" >> "$OUTPUT_DIR/$filename.txt"
