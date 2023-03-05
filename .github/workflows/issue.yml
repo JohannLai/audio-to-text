@@ -54,6 +54,12 @@ jobs:
       - name: start audio-to-text
         env:
           API_KEY: ${{ secrets.API_KEY }}
+          PROXY_HOST: ${{ secrets.PROXY_HOST }}
+          PROXY_PORT: ${{ secrets.PROXY_PORT }}
+          PROXY_HOST_C: ${{ secrets.PROXY_HOST_C }}
+          PROXY_PORT_C: ${{ secrets.PROXY_PORT_C }}
+          PROXY_USERNAME: ${{ secrets.PROXY_USERNAME }}
+          PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
         run: |
           make start_from_issue
       - name: if run failed, comment to issue

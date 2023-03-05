@@ -18,6 +18,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             sudo yum install -y epel-release
             sudo yum install -y python3-pip ffmpeg
             sudo pip3 install you-get
+            sudo yum install -y whois
         else
             echo "Dependencies are already installed on CentOS."
         fi
@@ -29,6 +30,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             sudo apt-get update
             sudo apt-get install -y jq curl python3-pip ffmpeg
             sudo pip3 install you-get
+            sudo apt-get install -y whois
         else
             echo "Dependencies are already installed on Ubuntu."
         fi
@@ -40,7 +42,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     if ! command -v jq &> /dev/null || ! command -v curl &> /dev/null || ! command -v ffmpeg &> /dev/null || ! command -v you-get &> /dev/null
     then
         # Install dependencies on macOS
-        brew install jq curl python3 ffmpeg you-get
+        brew install jq curl python3 ffmpeg you-get whois
     else
         echo "Dependencies are already installed on macOS."
     fi
@@ -49,7 +51,7 @@ else
 fi
 
 # Check if dependencies are installed successfully
-if ! command -v jq &> /dev/null || ! command -v curl &> /dev/null || ! command -v ffmpeg &> /dev/null || ! command -v you-get &> /dev/null
+if ! command -v jq &> /dev/null || ! command -v curl &> /dev/null || ! command -v ffmpeg &> /dev/null || ! command -v you-get &> /dev/null || ! command -v whois &> /dev/null
 then
     echo "Failed to install dependencies. Please check your system environment."
     exit 1

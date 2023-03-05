@@ -2,8 +2,20 @@
 
 # summary: Download all audios from a list of links
 
+source ./proxy/check.sh
+
 # download function
 function download() {
+    echo "Checking proxy ..."
+
+    if [[ $(check $1) == 1 ]]; then
+        echo "Using proxy c..."
+        make proxy-config-c
+    else
+        echo "Using proxy ..."
+        make proxy-config
+    fi
+
     echo "Downloading audio from $1 ..."
     url=$1
 

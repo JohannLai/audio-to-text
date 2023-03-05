@@ -7,6 +7,10 @@ MP3_TO_TEXT_CMD = ./script/mp3_to_text.sh
 SUMMARIZE_CMD = ./script/summarize_and_format.sh
 ISSUE_CMD = ./script/get_info_from_issue.sh
 COMMENT_CMD = ./script/comment.sh
+INSTALL_TEST_CMD = ./script/install_unit_test_dependencies.sh
+TEST_CMD = ./script/test.sh
+PROXY_CMD = ./proxy/config_normal.sh
+PROXY_C_CMD = ./proxy/config_main.sh
 
 start:
 	$(SETUP_CMD)
@@ -35,6 +39,14 @@ download:
 install:
 	$(INSTALL_CMD)
 
+# Install test
+install_test:
+	$(INSTALL_TEST_CMD)
+
+# Run unit test
+test:
+	$(TEST_CMD)
+
 # Convert all audios to mp3
 convert:
 	$(CONVERT_CMD)
@@ -54,6 +66,13 @@ comment:
 # Issue
 issue:
 	$(ISSUE_CMD)
+
+# Proxy
+proxy-config:
+	$(PROXY_CMD)
+
+proxy-config-c:
+	$(PROXY_C_CMD)
 
 # Reset all audios
 reset:

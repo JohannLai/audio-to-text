@@ -1,11 +1,13 @@
 #!/bin/bash
 
-# Get input parameter
-url=$1
-
-# Determine whether the link is a bilibili vidio link
-if [[ $url == "https://www.bilibili.com/video/"* && ($url == *"/BV"* || $url == *"/av"*) ]]; then
-    exit 0 # Return 0 if it is a bilibili vidio link
-else
-    exit 1 # Return 1 if it is not a bilibili vidio link
-fi
+# 判断是否是bilibili的链接
+# 参数：链接
+# 返回值：0-是Bilibili链接，1-不是Bilibili链接
+function is_bilibili_url() {
+    local url=$1
+    if [[ $url =~ ^https://www.bilibili.com/video/.*$ ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
