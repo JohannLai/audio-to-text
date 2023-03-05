@@ -19,10 +19,13 @@ jobs:
           echo "Issue title: ${{ github.event.issue.title }}"
           echo "Issue body: ${{ github.event.issue.body }}"
           echo "${{ github.event.issue.title }} ${{ github.event.issue.body }}" > issue.txt
-          cat issue.txt
       - uses: actions/github-script@v6
         with:
           script: |
+            const fs = require('fs');
+            const path = require('path');
+            const issueOutput = fs.readFileSync('issue.txt', 'utf8');
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -30,19 +33,22 @@ jobs:
               body: `
               Hi there! 👋
 
-              Thanks for reaching out! 🤖 I've received your request and I'm currently working on it. 
-              
+              Thanks for using my services! 🤖❤️! 🤖 I've received your request and I'm currently working on it.
+
+              I'll be processing the following text:
+              \`\`\`shell
+              ${issueOutput}
+              \`\`\`
+
               ⚙️ It might take a few minutes, so please bear with me. 🙏 You can check the progress [here](https://github.com/JohannLai/audio-to-text/actions/workflows/issue.yml)
-              
-              In the meantime, feel free to grab a cup of coffee ☕️ or take a quick break. 
-              
+
+              In the meantime, feel free to grab a cup of coffee ☕️ or take a quick break.
+
               I'll notify you as soon as I'm done! 😊
-              
+
               If you find my services helpful, you can support me by buying me a coffee ☕️ using the following button:
 
               [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/johannli)
-
-              Thanks for using my services! 🤖❤️
               `
             })
       - name: start audio-to-text
@@ -64,7 +70,7 @@ jobs:
 
               I'm sorry to inform you that I've encountered an error while processing your request. 😢
 
-              Please try again later. 🙏
+              Please try again later by reopen this issue. 🙏
 
               Thanks for using my services! 🤖❤️
               `
@@ -74,6 +80,7 @@ jobs:
           script: |
             const fs = require('fs');
             const path = require('path');
+            const __dirname = path.resolve();
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -98,7 +105,7 @@ jobs:
                   repo: context.repo.repo,
                   body: content
                 })
-            }
+            })
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,

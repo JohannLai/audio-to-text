@@ -8,7 +8,7 @@ function download() {
     url=$1
 
     # Get video info
-    info=$(you-get --json "$url")
+    info=$(you-get --json "$url" --debug)
 
     # 解析 JSON 数据，找到 size 最小的 itag
     min_size=$(echo $info | jq -r '.streams[].size | select(. != null)' | sort -n | head -n 1)
@@ -18,11 +18,14 @@ function download() {
 
     # Download video or $min_itag === "null"
     if [[ -n "$min_itag" ]] && [[ "$min_itag" != "null" ]]; then
-        you-get --itag "$min_itag" "$url" -o ./audio
+        you-get --itag "$min_itag" "$url" -o ./audio --debug
     else
-        you-get "$url" -o ./audio
+        you-get "$url" -o ./audio --debug
     fi
 }
+
+echo "Downloading audios from audios_list.txt ..."
+cat audios_list.txt
 
 # read links and download audios line by line
 while IFS=$' \t\n\r' read -r line || [[ -n "$line" ]]; do
