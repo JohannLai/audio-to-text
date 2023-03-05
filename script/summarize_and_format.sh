@@ -65,7 +65,7 @@ for file in $INPUT_DIR/*.txt; do
     completion=$(echo "$response" | jq -r '.choices[].message.content')
     
     # Append the completion to the output file
-    echo "## $filename"
+    echo "# $filename"  >> "$OUTPUT_DIR/$filename.txt"
     echo "## Summary Text" >> "$OUTPUT_DIR/$filename.txt"
     echo "$completion" >> "$OUTPUT_DIR/$filename.txt"
     echo "" >> "$OUTPUT_DIR/$filename.txt"
