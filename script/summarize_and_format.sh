@@ -4,6 +4,10 @@
 INPUT_DIR="./text"
 OUTPUT_DIR="./text_formatted"
 
+if [ ! -d $OUTPUT_DIR ]; then
+  mkdir -p $OUTPUT_DIR
+fi
+
 # Loop through each text file in the input directory
 for file in $INPUT_DIR/*.txt; do
   # Get the file name without the extension
