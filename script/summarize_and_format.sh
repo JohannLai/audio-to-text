@@ -57,9 +57,11 @@ for file in $INPUT_DIR/*.txt; do
   completion=$(echo "$response" | jq -r '.choices[].message.content')
 
   # if error, print the  contents of the file
-  if [[ $completion == *"error"* ]]; then
-    echo "## Error $completion" >> "$OUTPUT_DIR/$filename.txt"
-    echo "## Contents $contents" >> "$OUTPUT_DIR/$filename.txt"
+  if [[ $response == *"error"* ]]; then
+    echo "## Original text" >> "$OUTPUT_DIR/$filename.txt"
+    echo "$contents" >> "$OUTPUT_DIR/$filename.txt"
+    echo "## Something wrong when summarizing." >> "$OUTPUT_DIR/$filename.txt"
+    echo "Error: $response" >> "$OUTPUT_DIR/$filename.txt"
     exit 1
   fi
   
