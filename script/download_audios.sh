@@ -8,7 +8,7 @@ source ./proxy/check.sh
 function download() {
     echo "Checking proxy ... for $1"
 
-    if [[ $(check $1) == 1 ]]; then
+    if check "$1"; then
         echo "Using proxy c..."
         make proxy-config-c
     else
@@ -17,6 +17,7 @@ function download() {
     fi
 
     echo "Downloading audio from $1 ..."
+    
     url=$1
 
     # Get video info
