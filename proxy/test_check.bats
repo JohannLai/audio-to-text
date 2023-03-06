@@ -2,12 +2,12 @@
 
 load check.sh
 
-@test "check domain 0" {
-  run check "https://www.bilibili.com/video/BV1rv4y1W7Ja/?spm_id_from=333.1007.tianma.1-2-2.click"
-  [ "$status" -eq 1 ]
+@test "Check proxy for https://www.youtube.com/watch?v=QH2-TGUlwu4" {
+  run check "https://www.youtube.com/watch?v=QH2-TGUlwu4"
+  [ "$output" = "0" ]
 }
 
-@test "check domain 1" {
-  run check "youtube.com"
-  [ "$status" -eq 0 ]
+@test "Check proxy for https://www.bilibili.com" {
+  run check "https://www.bilibili.com"
+  [ "$output" = "1" ]
 }

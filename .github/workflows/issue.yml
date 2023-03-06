@@ -32,22 +32,19 @@ jobs:
               repo: context.repo.repo,
               body: `
               Hi there! 👋
+              Thanks for using my services! 🤖❤️! 🤖 I've received your request and currently working on it.
 
-              Thanks for using my services! 🤖❤️! 🤖 I've received your request and I'm currently working on it.
-
-              I'll be processing the following link:
+              I'll be processing the following text:
               \`\`\`shell
               ${issueOutput}
               \`\`\`
 
-              ⚙️ It might take a few minutes, so please bear with me. 🙏 You can check the progress [here](https://github.com/JohannLai/audio-to-text/actions/workflows/issue.yml)
+              ⚙️ It might take a few minutes 🙏 You can check the progress [here](https://github.com/JohannLai/audio-to-text/actions/workflows/issue.yml)
 
               In the meantime, feel free to grab a cup of coffee ☕️ or take a quick break.
-
               I'll notify you as soon as I'm done! 😊
 
               If you find my services helpful, you can support me by buying me a coffee ☕️ using the following button:
-
               [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/johannli)
               `
             })
@@ -126,21 +123,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `
-              👋
-
-              If you find my services helpful, you can support me by buying me a coffee ☕️ using the following button:
-
-              [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/johannli)
-
-              Thanks for using my services! 🤖❤️
-              `
-            })
-
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,

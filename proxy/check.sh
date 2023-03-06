@@ -11,9 +11,9 @@ function check {
 
   whois_info=$(whois $domain)
 
-  if [[ $whois_info =~ CN ]] || [[ $whois_info =~ .cn ]]; then
-    return 1
+  if [[ $whois_info =~ CN ]] || [[ $whois_info =~ \.cn ]]; then
+    echo 1
   else
-    return 0
+    echo 0
   fi
 }

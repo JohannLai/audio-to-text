@@ -6,18 +6,19 @@ source ./proxy/check.sh
 
 # download function
 function download() {
-    echo "Checking proxy ... for $1"
+    echo "Checking proxy for $1 ..."
 
-    if check "$1"; then
+    if [[ $(check "$1") == "1" ]]; then
         echo "Using proxy c..."
-        make proxy-config-c
+        # make proxy-config-c
+        alias you-get="you-get -x "http://$PROXY_USERNAME:$PROXY_PASSWORD@$PROXY_HOST_C:$PROXY_PORT_C""
     else
         echo "Using proxy ..."
-        make proxy-config
+        alias you-get="you-get -x "http://$PROXY_USERNAME:$PROXY_PASSWORD@$PROXY_HOST:$PROXY_PORT""
     fi
 
     echo "Downloading audio from $1 ..."
-    
+
     url=$1
 
     # Get video info
@@ -41,8 +42,9 @@ echo "Downloading audios from audios_list.txt ..."
 cat audios_list.txt
 
 # read links and download audios line by line
-while IFS=$' \t\n\r' read -r line || [[ -n "$line" ]]; do
+while IFS= read -r line || [[ -n "$line" ]]; do
   if [[ -n "$line" ]]; then
+    echo "prepare download for $line ..."
     download "$line"
     last_line="$line"
   fi
