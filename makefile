@@ -12,14 +12,18 @@ TEST_CMD = ./test/run_test.sh
 PROXY_CMD = ./proxy/config_normal.sh
 PROXY_C_CMD = ./proxy/config_main.sh
 
-start:
+help: # Show help for each of the Makefile recipes.
+	@grep -E '^[a-zA-Z0-9 -]+:.*#'  Makefile | sort | while read -r l; do printf "\033[1;32m$$(echo $$l | cut -f 1 -d':')\033[00m:$$(echo $$l | cut -f 2- -d'#')\n"; done
+
+
+start: # Start the program
 	$(SETUP_CMD)
 	$(DOWNLOAD_CMD)
 	$(CONVERT_CMD)
 	$(MP3_TO_TEXT_CMD)
 	$(SUMMARIZE_CMD)
 
-start_from_issue:
+start_from_issue: # Start the program from issue
 	$(ISSUE_CMD)
 	$(SETUP_CMD)
 	$(DOWNLOAD_CMD)
@@ -27,55 +31,43 @@ start_from_issue:
 	$(MP3_TO_TEXT_CMD)
 	$(SUMMARIZE_CMD)
 
-# default target SETUP
-setup:
+setup: # default target SETUP
 	$(SETUP_CMD)
 
-# Download all audios
-download:
+download: # Download all audios
 	$(DOWNLOAD_CMD)
 
-# Install all dependencies
-install:
+install: # Install all dependencies
 	$(INSTALL_CMD)
 
-# Install test
-install_test:
+install_test: # Install test
 	$(INSTALL_TEST_CMD)
 
-# Run unit test
-unit-test:
+unit-test: # Run unit test
 	$(TEST_CMD)
 
-# Convert all audios to mp3
-convert:
+convert: # Convert all audios to mp3
 	$(CONVERT_CMD)
 
-# Convert all mp3 to text
-mp3_to_text:
+mp3_to_text: # Convert all mp3 to text
 	$(MP3_TO_TEXT_CMD)
 
-# Summarize all audios
-summarize:
+summarize: # Summarize all audios
 	$(SUMMARIZE_CMD)
 
-# Comment on issue
-comment:
+comment: # Comment on issue run script
 	$(COMMENT_CMD)
 
-# Issue
-issue:
+issue: # Open issue will write to issue.txt, and run script
 	$(ISSUE_CMD)
 
-# Proxy
-proxy-config:
+proxy-config: # Config proxy
 	$(PROXY_CMD)
 
-proxy-config-c:
+proxy-config-c: # Config proxy c
 	$(PROXY_C_CMD)
 
-# Reset all audios
-reset:
+reset: # Reset all audios, remove all audios, mp3, text, text_formatted
 	rm -rf ./audio/*
 	rm -rf ./mp3/*
 	rm -rf ./text/*
