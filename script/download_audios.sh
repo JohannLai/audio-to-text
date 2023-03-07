@@ -10,8 +10,10 @@ function download() {
 
     if [[ $(check "$1") == "1" ]]; then
         echo "Using proxy c..."
-        # make proxy-config-c
-        alias you-get="you-get -x "http://$PROXY_USERNAME:$PROXY_PASSWORD@$PROXY_HOST_C:$PROXY_PORT_C""
+        session_id="s$RANDOM"
+        proxy_url="http://customer-$PROXY_USERNAME-sessid-$session_id:$PROXY_PASSWORD@$PROXY_HOST_C:$PROXY_PORT_C"
+        echo "proxy url $proxy_url"
+        alias you-get="you-get -x "
     else
         echo "Using proxy ..."
         alias you-get="you-get -x "http://$PROXY_USERNAME:$PROXY_PASSWORD@$PROXY_HOST:$PROXY_PORT""

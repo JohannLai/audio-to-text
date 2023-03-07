@@ -86,14 +86,14 @@ jobs:
               `
             })
 
-            github.rest.issues.addLabels({
+            await github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: ["fail", "success"]
             })
 
-            github.rest.issues.removeLabel({
+            await github.rest.issues.removeLabel({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -141,7 +141,7 @@ jobs:
 
             const fileName = files[0].length > 50 ? files[0].substring(0, 50) + "..." : files[0];
 
-            github.rest.issues.createComment({
+            await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -156,23 +156,23 @@ jobs:
               `
             })
 
-            github.rest.issues.addLabels({
+            github.rest.issues.update({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "🎬 -> 📝 " + fileName
+            })
+
+            await github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: ["success", "fail", "in-progress"]
             })
 
-            github.rest.issues.removeLabel({
+            await github.rest.issues.removeLabel({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: ["fail", "in-progress"]
-            })
-
-            github.rest.issues.update({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: "🎬 -> 📝 " + fileName
             })
