@@ -30,7 +30,7 @@ for file in $INPUT_DIR/*.mp3; do
   echo "Converting $file ..."
 
   # concat file name to PROMPT
-  PROMPT="$PROMPT The audio is about $file."
+  # PROMPT="$PROMPT The audio is about $file."
 
   # Extract the filename without extension from the file name
   filename=$(basename "$file" .mp3)

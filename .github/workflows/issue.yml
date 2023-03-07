@@ -38,21 +38,21 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `
-              Hi there! 👋
-              Thanks for using my services! 🤖❤️! 🤖 I've received your request and currently working on it.
+                Hi there! 👋
+                Thanks for using my services! ❤️! 
+                🤖 I've received your request and currently working on it.
 
-              I'll be processing the following text:
-              \`\`\`shell
-              ${issueOutput}
-              \`\`\`
+                ⚙️ It might take a few minutes 🙏  You can check the progress [here](https://github.com/JohannLai/audio-to-text/actions/workflows/issue.yml)
 
-              ⚙️ It might take a few minutes 🙏 You can check the progress [here](https://github.com/JohannLai/audio-to-text/actions/workflows/issue.yml)
+                In the meantime, feel free to chat with me ! 😊
+                I'll notify you as soon as I'm done! 😊
 
-              In the meantime, feel free to grab a cup of coffee ☕️ or take a quick break.
-              I'll notify you as soon as I'm done! 😊
+                If you find my services helpful, you can support me by buying me a coffee ☕️ 
 
-              If you find my services helpful, you can support me by buying me a coffee ☕️ using the following button:
-              [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/johannli)
+
+              <a href="https://www.buymeacoffee.com/johannli" target=”_blank”>
+                <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" width="200">
+              </a>
               `
             })
       - name: start audio-to-text
@@ -76,7 +76,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `
-              Hi there! 👋
+              🙇‍♂️🙇‍♂️🙇‍♂️
 
               I'm sorry to inform you that I've encountered an error while processing your request. 😢
 
@@ -90,7 +90,14 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ["fail"]
+              labels: ["fail", "success"]
+            })
+
+            github.rest.issues.removeLabel({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["success"]
             })
       - name: if run success, comment to issue
         uses: actions/github-script@v6
@@ -101,10 +108,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `
-              Hi there! 👋
-
-              I've finished processing your request! 🤖
-
+              Mission accomplished! 🥳🥳🥳
               Here's the result:
               `
             })
@@ -130,31 +134,45 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const fs = require('fs');
+            const path = require('path');
+            const __dirname = path.resolve();
+            const files = fs.readdirSync(path.join(__dirname, 'text_formatted'));
+
+            const fileName = files[0].length > 50 ? files[0].substring(0, 50) + "..." : files[0];
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `
-              👋
+              🙌
 
-              If you find my services helpful, you can support me by buying me a coffee ☕️ using the following button:
+              If you find my services helpful, you can support me by buying me a coffee ☕️ 
 
-              [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/johannli)
+              [!["Buy Me A Coffee"](https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png)](https://www.buymeacoffee.com/johannli)
 
               Thanks for using my services! 🤖❤️
               `
-            })
-
-            github.event.issue.removeLabel({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ["fail", "in-progress"]
             })
 
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ["success"]
+              labels: ["success", "fail", "in-progress"]
+            })
+
+            github.rest.issues.removeLabel({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["fail", "in-progress"]
+            })
+
+            github.rest.issues.update({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "🎬 -> 📝 " + fileName
             })
