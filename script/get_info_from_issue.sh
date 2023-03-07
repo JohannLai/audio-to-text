@@ -1,7 +1,6 @@
 #!/bin/bash
 
-
-text=$(cat issue.txt | tr -d ' \r \n')
+text=$(cat issue.txt | tr -d '\r\n')
 
 # If text is more than 1000 chars, error
 if [[ ${#text} -gt 1000 ]]; then
@@ -43,9 +42,22 @@ audio_url=$(echo "$response" | jq -r '.choices[].message.content' | tr -d '"')
 # if audio_url is empty or "null" string, exit
 if [[ -z $audio_url || $audio_url == "null" ]]; then
   echo "audio_url is empty. Exiting.."
-  exit 1 
+  exit 1
 fi
 
 # write audio links to audios_list.txt
-echo "$audio_url" > audios_list.txt
-echo "" >> audios_list.txt
+echo "$audio_url" >audios_list.txt
+
+# cat audios_list.txt, 如果超过 10 行， 只需要前 10 行
+echo "check if audios_list.txt has more than 10 lines"
+if [[ $(cat audios_list.txt | wc -l) -gt 10 ]]; then
+  echo "audios_list.txt has more than 10 lines, only keep the first 10 lines"
+  cp audios_list.txt audios_list.txt.bak
+  cat audios_list.txt.bak | head -n 10 >audios_list.txt
+  rm audios_list.txt.bak
+fi
+
+echo "not more than 10 lines, just cat audios_list.txt"
+cat audios_list.txt
+
+echo "" >>audios_list.txt
