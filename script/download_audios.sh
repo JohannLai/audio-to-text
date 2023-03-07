@@ -43,12 +43,12 @@ cat audios_list.txt
 
 # read links and download audios line by line
 while IFS= read -r line || [[ -n "$line" ]]; do
-  if [[ -n "$line" ]]; then
-    echo "prepare download for $line ..."
-    download "$line"
-    last_line="$line"
-  fi
-done < audios_list.txt
+    if [[ -n "$line" ]]; then
+        # echo "prepare download for $line ..."
+        download "$line"
+        last_line="$line"
+    fi
+done <audios_list.txt
 
 # If the last line does not have a blank line, download the audio file of the last line again
 if [[ -n "$last_line" ]]; then

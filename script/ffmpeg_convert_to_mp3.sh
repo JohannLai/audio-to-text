@@ -30,7 +30,7 @@ for audio_file in ./audio/*; do
   # -f mp3: Set output format to MP3.
   # -loglevel error: Only output error messages.
 
-  ffmpeg -i "$audio_file" -vn -acodec libmp3lame -ab 128k -ar 44100 -loglevel error"$output_file" 2>&1
+  ffmpeg -i "$audio_file" -loglevel error -vn -acodec libmp3lame -ab 128k -ar 44100 "$output_file" 2>&1
   if [[ "$ffmpeg_output" == *"Invalid data found when processing input"* ]]; then
     # The file cannot be converted to MP3
     echo "The file $input_file cannot be converted to MP3"
