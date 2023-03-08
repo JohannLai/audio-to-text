@@ -48,11 +48,9 @@ jobs:
                 I'll notify you as soon as I'm done! 😊
 
                 If you find my services helpful, you can support me by buying me a coffee ☕️ 
-
-
-              <a href="https://www.buymeacoffee.com/johannli" target=”_blank”>
-                <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" width="200">
-              </a>
+                <a href="https://www.buymeacoffee.com/johannli" target=”_blank”>
+                  <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" width="200">
+                </a>
               `
             })
       - name: start audio-to-text
@@ -90,14 +88,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ["fail", "success"]
-            })
-
-            await github.rest.issues.removeLabel({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ["success"]
+              labels: ["fail"]
             })
       - name: if run success, comment to issue
         uses: actions/github-script@v6
@@ -139,7 +130,7 @@ jobs:
             const __dirname = path.resolve();
             const files = fs.readdirSync(path.join(__dirname, 'text_formatted'));
 
-            const fileName = files[0].length > 50 ? files[0].substring(0, 50) + "..." : files[0];
+            const fileName = files[1].length > 50 ? files[1].substring(0, 50) + "..." : files[1];
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -150,8 +141,9 @@ jobs:
 
               If you find my services helpful, you can support me by buying me a coffee ☕️ 
 
-              [!["Buy Me A Coffee"](https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png)](https://www.buymeacoffee.com/johannli)
-
+              <a href="https://www.buymeacoffee.com/johannli" target=”_blank”>
+                <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" width="200">
+              </a>
               Thanks for using my services! 🤖❤️
               `
             })
@@ -167,12 +159,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ["success", "fail", "in-progress"]
-            })
-
-            await github.rest.issues.removeLabel({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ["fail", "in-progress"]
+              labels: ["success"]
             })
