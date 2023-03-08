@@ -38,19 +38,19 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `
-                Hi there! 👋
-                Thanks for using my services! ❤️! 
-                🤖 I've received your request and currently working on it.
+              Hi there! 👋
+              Thanks for using my services! ❤️! 
+              🤖 I've received your request and currently working on it.
 
-                ⚙️ It might take a few minutes 🙏  You can check the progress [here](https://github.com/JohannLai/audio-to-text/actions/workflows/issue.yml)
+              ⚙️ It might take a few minutes 🙏  You can check the progress [here](https://github.com/JohannLai/audio-to-text/actions/workflows/issue.yml)
 
-                In the meantime, feel free to chat with me ! 😊
-                I'll notify you as soon as I'm done! 😊
+              In the meantime, feel free to chat with me ! 😊
+              I'll notify you as soon as I'm done! 😊
 
-                If you find my services helpful, you can support me by buying me a coffee ☕️ 
-                <a href="https://www.buymeacoffee.com/johannli" target=”_blank”>
-                  <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" width="200">
-                </a>
+              If you find my services helpful, you can support me by buying me a coffee ☕️ 
+              <a href="https://www.buymeacoffee.com/johannli" target=”_blank”>
+                <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" width="200">
+              </a>
               `
             })
       - name: start audio-to-text
@@ -140,11 +140,10 @@ jobs:
               🙌
 
               If you find my services helpful, you can support me by buying me a coffee ☕️ 
-
+              Thanks for using my services! ❤️
               <a href="https://www.buymeacoffee.com/johannli" target=”_blank”>
                 <img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" width="200">
               </a>
-              Thanks for using my services! 🤖❤️
               `
             })
 
