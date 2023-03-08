@@ -26,13 +26,6 @@ jobs:
             const path = require('path');
             const issueOutput = fs.readFileSync('issue.txt', 'utf8');
 
-            github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ["in-progress"]
-            })
-
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,

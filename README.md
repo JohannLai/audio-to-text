@@ -1,4 +1,11 @@
+<img height="129" align="left" src="https://user-images.githubusercontent.com/10769405/223718552-d6bbf8a5-0eba-486b-9619-64e27d690435.png" alt="Logo">
+
 # ChatGPT Audio link to text and summary
+
+[![LICENSE](https://img.shields.io/github/license/JohannLai/audio-to-text)](https://github.com/JohannLai/audio-to-text/blob/main/LICENSE)
+---
+
+
 
 Convert audio to text and summary **just need to input the audio link**.
 
