@@ -6,6 +6,7 @@ on:
 jobs:
   audio-to-text:
     runs-on: ubuntu-latest
+    container: johannlai/audio-to-text:latest
     permissions:
       issues: write
     steps:
@@ -38,7 +39,8 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `
-              Hi there! 👋
+              Hi! 👋
+
               Thanks for using my services! ❤️! 
               🤖 I've received your request and currently working on it.
 
@@ -152,6 +154,13 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "🎬 -> 📝 " + fileName
+            })
+
+            await github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["in-progress"]
             })
 
             await github.rest.issues.addLabels({
