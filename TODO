@@ -1,7 +1,7 @@
 ver 1.0 TODO
 ===================
 
-- speed up the script
+- speed up the script (use container to run)
 - fixed the typo of the text converted from audio
 - no need to chunk the text file
 - use gpt index to handle the long text
