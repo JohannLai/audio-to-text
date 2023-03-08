@@ -2,7 +2,7 @@
 
 Convert audio to text and summary **just need to input the audio link**.
 
-## Play with Issue
+## [Play with Issue](https://github.com/JohannLai/audio-to-text/issues/new?assignees=&labels=&template=%F0%9F%8E%AC-auto-convert-video-links-to-text-and-summary-%F0%9F%93%9D.md&title=%5B%F0%9F%8E%AC+Auto-Convert%5D)
 
 You can play with this project by opening an issue. [Just fill in the text with a audio link and publish it here](https://github.com/JohannLai/audio-to-text/issues/new?assignees=&labels=&template=%F0%9F%8E%AC-auto-convert-video-links-to-text-and-summary-%F0%9F%93%9D.md&title=%5B%F0%9F%8E%AC+Auto-Convert%5D)
 
