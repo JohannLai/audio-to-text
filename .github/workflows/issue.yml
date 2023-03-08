@@ -85,13 +85,6 @@ jobs:
               `
             })
 
-             await github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ["in-progress"]
-            })
-
             await github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -160,13 +153,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "🎬 -> 📝 " + fileName
-            })
-
-            await github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ["in-progress"]
             })
 
             await github.rest.issues.addLabels({
