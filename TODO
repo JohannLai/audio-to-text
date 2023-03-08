@@ -1,6 +1,7 @@
 ver 1.0 TODO
 ===================
 
-- add proxy to the script
 - speed up the script
 - fixed the typo of the text converted from audio
+- no need to chunk the text file
+- use gpt index to handle the long text
