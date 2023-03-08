@@ -6,7 +6,18 @@ on:
 jobs:
   audio-to-text:
     runs-on: ubuntu-latest
-    container: johannlai/audio-to-text:latest
+    container:
+      image: node:14.16
+      env:
+        API_KEY: ${{ secrets.API_KEY }}
+        PROXY_HOST: ${{ secrets.PROXY_HOST }}
+        PROXY_PORT: ${{ secrets.PROXY_PORT }}
+        PROXY_HOST_C: ${{ secrets.PROXY_HOST_C }}
+        PROXY_PORT_C: ${{ secrets.PROXY_PORT_C }}
+        PROXY_USERNAME: ${{ secrets.PROXY_USERNAME }}
+        PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
+      volumes:
+        - ${{ github.workspace }}:/workspace
     permissions:
       issues: write
     steps:
@@ -19,13 +30,13 @@ jobs:
         run: |
           echo "Issue title: ${{ github.event.issue.title }}"
           echo "Issue body: ${{ github.event.issue.body }}"
-          echo "${{ github.event.issue.title }} ${{ github.event.issue.body }}" > issue.txt
+          echo "${{ github.event.issue.title }} ${{ github.event.issue.body }}" > /workspace/issue.txt
       - uses: actions/github-script@v6
         with:
           script: |
             const fs = require('fs');
             const path = require('path');
-            const issueOutput = fs.readFileSync('issue.txt', 'utf8');
+            const issueOutput = fs.readFileSync('/workspace/issue.txt', 'utf8');
 
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
@@ -56,15 +67,8 @@ jobs:
               `
             })
       - name: start audio-to-text
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-          PROXY_HOST: ${{ secrets.PROXY_HOST }}
-          PROXY_PORT: ${{ secrets.PROXY_PORT }}
-          PROXY_HOST_C: ${{ secrets.PROXY_HOST_C }}
-          PROXY_PORT_C: ${{ secrets.PROXY_PORT_C }}
-          PROXY_USERNAME: ${{ secrets.PROXY_USERNAME }}
-          PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
         run: |
+          cd /workspace
           make start_from_issue
       - name: if run failed, comment to issue
         if: ${{ failure() }}
@@ -84,6 +88,13 @@ jobs:
 
               Thanks for using my services! 🤖❤️
               `
+            })
+
+            await github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["in-progress"]
             })
 
             await github.rest.issues.addLabels({
@@ -111,6 +122,7 @@ jobs:
             const fs = require('fs');
             const path = require('path');
             const __dirname = path.resolve();
+            console.log("__dirname:", __dirname);
             const files = fs.readdirSync(path.join(__dirname, 'text_formatted'));
 
             files.map(file => {
