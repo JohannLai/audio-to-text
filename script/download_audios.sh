@@ -8,20 +8,24 @@ source ./proxy/check.sh
 function download() {
     echo "Checking proxy for $1 ..."
 
-    if [[ $(check "$1") == "1" ]]; then
-        echo "Using proxy c..."
-        session_id="d$RANDOM"
-        proxy_url="http://customer-$PROXY_USERNAME-sessid-$session_id:$PROXY_PASSWORD@$PROXY_HOST_C:$PROXY_PORT_C"
-        echo "proxy url $proxy_url"
-        alias you-get="you-get -x "$proxy_url""
-    fi
+    # if [[ $(check "$1") == "1" ]]; then
+    #     echo "Using proxy c..."
+    #     session_id="d$RANDOM"
+    #     proxy_url="http://customer-$PROXY_USERNAME-sessid-$session_id:$PROXY_PASSWORD@$PROXY_HOST_C:$PROXY_PORT_C"
+    #     echo "proxy url $proxy_url"
+    #     # alias you-get="you-get -x "$proxy_url""
+    # fi
 
     echo "Downloading audio from $1 ..."
 
     url=$1
 
-    # Get video info
-    info=$(you-get --json "$url" --debug)
+    # if exists proxy, use proxy
+    if [[ -n "$proxy_url" ]]; then
+        info=$(you-get -x "$proxy_url" --json "$url" --debug)
+    else
+        info=$(you-get --json "$url" --debug)
+    fi
 
     # 解析 JSON 数据，找到 size 最小的 itag
     min_size=$(echo $info | jq -r '.streams[].size | select(. != null)' | sort -n | head -n 1)
@@ -31,9 +35,17 @@ function download() {
 
     # Download video or $min_itag === "null"
     if [[ -n "$min_itag" ]] && [[ "$min_itag" != "null" ]]; then
-        you-get --itag "$min_itag" "$url" -o ./audio --debug
+        if [[ -n "$proxy_url" ]]; then
+            you-get -x "$proxy_url" --itag "$min_itag" "$url" -o ./audio --debug
+        else
+            you-get "$url" -o ./audio --itag "$min_itag" --debug
+        fi
     else
-        you-get "$url" -o ./audio --debug
+        if [[ -n "$proxy_url" ]]; then
+            you-get -x "$proxy_url" "$url" -o ./audio --debug
+        else
+            you-get "$url" -o ./audio --debug
+        fi
     fi
 }
 
