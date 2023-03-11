@@ -16,10 +16,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             sudo yum install -y jq curl
             sudo yum install -y epel-release
             sudo yum install -y python3-pip ffmpeg
-            sudo pip3 install you-get
-            sudo pip3 install gpt-index
-            sudo pip3 install langchain
-            sudo pip3 install transformers
+            sudo pip3 install aiohttp you-get gpt-index langchain transformers ipython
             sudo yum install -y whois
         else
             echo "Dependencies are already installed on CentOS."
@@ -30,7 +27,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             # Install dependencies on Ubuntu
             sudo apt-get update
             sudo apt-get install -y jq curl python3-pip ffmpeg
-            sudo pip3 install you-get gpt-index langchain transformers ipython
+            sudo pip3 install aiohttp you-get gpt-index langchain transformers ipython
             sudo apt-get install -y whois
         else
             echo "Dependencies are already installed on Ubuntu."
@@ -54,7 +51,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     fi
 
     # Install Python packages anyway
-    pip3 install gpt-index langchain transformers ipython
+    pip3 install aiohttp gpt-index langchain transformers ipython
 else
     echo "Unsupported OS. Please install dependencies manually."
 fi
