@@ -15,7 +15,7 @@
 <a href="https://www.buymeacoffee.com/johannli"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=johannli&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
 
 
-## 📚 基于视频构建你的私人教师 
+## 📚 基于视频课程构建你的私人教师 
 
 通过利用 ChatGPT OpenAPI 和 GPT Index，您可以通过下载 多个视频，创建一个知识数据库，然后向 AI 提出任何问题。
 
