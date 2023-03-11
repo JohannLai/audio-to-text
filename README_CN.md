@@ -1,26 +1,23 @@
 <img height="129" align="left" src="https://user-images.githubusercontent.com/10769405/223718552-d6bbf8a5-0eba-486b-9619-64e27d690435.png" alt="Logo">
 
-# ChatGPT Audio link to text and summary
+# ChatGPT 音频链接转文本、摘要
 
 [![LICENSE](https://img.shields.io/github/license/JohannLai/audio-to-text)](https://github.com/JohannLai/audio-to-text/blob/main/LICENSE)
----
 
-Convert audio to text and summary **just need to input the audio link**.
+将音频转换成文本和摘要，**只需输入音频链接**。
 
-[中文文档](README_CN.md)
+## [在 Issue 中把玩](https://github.com/JohannLai/audio-to-text/issues/new?assignees=&labels=&template=%F0%9F%8E%AC-auto-convert-video-links-to-text-and-summary-%F0%9F%93%9D.md&title=%5B%F0%9F%8E%AC+Auto-Convert%5D)
 
-## [Play with Issue](https://github.com/JohannLai/audio-to-text/issues/new?assignees=&labels=&template=%F0%9F%8E%AC-auto-convert-video-links-to-text-and-summary-%F0%9F%93%9D.md&title=%5B%F0%9F%8E%AC+Auto-Convert%5D)
+您可以通过打开 issue 来玩这个项目。[只需在此处填写带有音频链接的文本并发布](https://github.com/JohannLai/audio-to-text/issues/new?assignees=&labels=&template=%F0%9F%8E%AC-auto-convert-video-links-to-text-and-summary-%F0%9F%93%9D.md&title=%5B%F0%9F%8E%AC+Auto-Convert%5D)
 
-You can play with this project by opening an issue. [Just fill in the text with a audio link and publish it here](https://github.com/JohannLai/audio-to-text/issues/new?assignees=&labels=&template=%F0%9F%8E%AC-auto-convert-video-links-to-text-and-summary-%F0%9F%93%9D.md&title=%5B%F0%9F%8E%AC+Auto-Convert%5D)
-
-If you have any questions, please feel free to open an issue. I will try my best to answer your questions.
+如果您有任何问题，请随时提出问题。我会尽力回答您的问题。
 
 <a href="https://www.buymeacoffee.com/johannli"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=johannli&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
 
 
-## 📚 Build Your Personal Teacher Based on Videos
+## 📚 基于视频构建你的私人教师 
 
-By utilizing ChatGPT OpenAPI and GPT Index, you can create a knowledge database by compiling multiple videos, and then ask any questions you want.
+通过利用ChatGPT OpenAPI和GPT Index，您可以通过编译多个视频创建一个知识数据库，然后提出任何问题。
 
 ```bash
 # clone it
@@ -42,7 +39,7 @@ $ make ask_ai
 ```
 
 
-## 🕹️ For developers
+## 🕹️ 开发者
 
 ### run on local
 clone it and run it on your local machine
