@@ -33,10 +33,10 @@ for audio_file in ./audio/*; do
   ffmpeg -i "$audio_file" -loglevel error -vn -acodec libmp3lame -ab 128k -ar 44100 "$output_file" 2>&1
   if [[ "$ffmpeg_output" == *"Invalid data found when processing input"* ]]; then
     # The file cannot be converted to MP3
-    echo "The file $input_file cannot be converted to MP3"
+    echo "The file $audio_file cannot be converted to MP3"
   else
     # The file can be converted to MP3
-    echo "The file $input_file can be converted to MP3"
+    echo "The file $audio_file can be converted to MP3"
   fi
 
 done
