@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Cat the comment.txt file and curl it to the OpenAI API
 text=$(cat comment.txt | tr -d ' \r \s \n')
 
@@ -23,7 +22,7 @@ param='{
 # Call the OpenAI API to get a completion
 response=$(curl -# https://api.openai.com/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $API_KEY" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
   -d "$param")
 
 echo $response
@@ -31,5 +30,5 @@ echo $response
 # Parse the response result returned by the API
 result=$(echo "$response" | jq -r '.choices[].message.content' | tr -d '"')
 
-echo "$result" >> comment_result.txt
-echo "" >> comment_result.txt
+echo "$result" >>comment_result.txt
+echo "" >>comment_result.txt

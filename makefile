@@ -11,10 +11,10 @@ INSTALL_TEST_CMD = ./script/install_unit_test_dependencies.sh
 TEST_CMD = ./test/run_test.sh
 PROXY_CMD = ./proxy/config_normal.sh
 PROXY_C_CMD = ./proxy/config_main.sh
+ASK_AI_CMD = ./script/python_lib/ask_ai.py
 
 help: # Show help for each of the Makefile recipes.
 	@grep -E '^[a-zA-Z0-9 -]+:.*#'  Makefile | sort | while read -r l; do printf "\033[1;32m$$(echo $$l | cut -f 1 -d':')\033[00m:$$(echo $$l | cut -f 2- -d'#')\n"; done
-
 
 start: # Start the program
 	$(SETUP_CMD)
@@ -30,6 +30,13 @@ start_from_issue: # Start the program from issue
 	$(CONVERT_CMD)
 	$(MP3_TO_TEXT_CMD)
 	$(SUMMARIZE_CMD)
+
+ask_ai: # Ask AI base video text
+	$(SETUP_CMD)
+	$(DOWNLOAD_CMD)
+	$(CONVERT_CMD)
+	$(MP3_TO_TEXT_CMD)
+	$(ASK_AI_CMD)
 
 setup: # default target SETUP
 	$(SETUP_CMD)

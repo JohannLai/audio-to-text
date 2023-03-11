@@ -31,7 +31,7 @@ echo "request params: $param"
 # Call the OpenAI API to get a completion
 response=$(curl -# https://api.openai.com/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $API_KEY" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
   -d "$param")
 
 echo "response: $response"
