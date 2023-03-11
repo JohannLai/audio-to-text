@@ -17,7 +17,7 @@
 
 ## 📚 基于视频构建你的私人教师 
 
-通过利用ChatGPT OpenAPI和GPT Index，您可以通过编译多个视频创建一个知识数据库，然后提出任何问题。
+通过利用 ChatGPT OpenAPI 和 GPT Index，您可以通过下载 多个视频，创建一个知识数据库，然后向 AI 提出任何问题。
 
 ```bash
 # clone it
