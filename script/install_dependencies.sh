@@ -11,25 +11,26 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Check if CentOS or Ubuntu
     if [[ -f "/etc/redhat-release" ]]; then
         # Check if dependencies are installed on CentOS
-        if ! command -v jq &> /dev/null || ! command -v curl &> /dev/null || ! command -v ffmpeg &> /dev/null || ! command -v you-get &> /dev/null
-        then
+        if ! command -v jq &>/dev/null || ! command -v curl &>/dev/null || ! command -v ffmpeg &>/dev/null || ! command -v you-get &>/dev/null; then
             # Install dependencies on CentOS
             sudo yum install -y jq curl
             sudo yum install -y epel-release
             sudo yum install -y python3-pip ffmpeg
             sudo pip3 install you-get
+            sudo pip3 install gpt-index
+            sudo pip3 install langchain
+            sudo pip3 install transformers
             sudo yum install -y whois
         else
             echo "Dependencies are already installed on CentOS."
         fi
     elif [[ -f "/etc/lsb-release" ]]; then
         # Check if dependencies are installed on Ubuntu
-        if ! command -v jq &> /dev/null || ! command -v curl &> /dev/null || ! command -v ffmpeg &> /dev/null || ! command -v you-get &> /dev/null
-        then
+        if ! command -v jq &>/dev/null || ! command -v curl &>/dev/null || ! command -v ffmpeg &>/dev/null || ! command -v you-get &>/dev/null; then
             # Install dependencies on Ubuntu
             sudo apt-get update
             sudo apt-get install -y jq curl python3-pip ffmpeg
-            sudo pip3 install you-get
+            sudo pip3 install you-get gpt-index langchain transformers ipython
             sudo apt-get install -y whois
         else
             echo "Dependencies are already installed on Ubuntu."
@@ -38,21 +39,28 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         echo "Unsupported Linux distribution. Please install dependencies manually."
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+    # Check if Homebrew is installed
+    if ! command -v brew &>/dev/null; then
+        # Install Homebrew
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+
     # Check if dependencies are installed on macOS
-    if ! command -v jq &> /dev/null || ! command -v curl &> /dev/null || ! command -v ffmpeg &> /dev/null || ! command -v you-get &> /dev/null
-    then
+    if ! command -v jq &>/dev/null || ! command -v curl &>/dev/null || ! command -v ffmpeg &>/dev/null || ! command -v you-get &>/dev/null; then
         # Install dependencies on macOS
         brew install jq curl python3 ffmpeg you-get whois
     else
         echo "Dependencies are already installed on macOS."
     fi
+
+    # Install Python packages anyway
+    pip3 install gpt-index langchain transformers ipython
 else
     echo "Unsupported OS. Please install dependencies manually."
 fi
 
 # Check if dependencies are installed successfully
-if ! command -v jq &> /dev/null || ! command -v curl &> /dev/null || ! command -v ffmpeg &> /dev/null || ! command -v you-get &> /dev/null || ! command -v whois &> /dev/null
-then
+if ! command -v jq &>/dev/null || ! command -v curl &>/dev/null || ! command -v ffmpeg &>/dev/null || ! command -v you-get &>/dev/null || ! command -v whois &>/dev/null; then
     echo "Failed to install dependencies. Please check your system environment."
     exit 1
 fi
