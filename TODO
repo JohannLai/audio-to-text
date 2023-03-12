@@ -5,3 +5,4 @@ ver 1.0 TODO
 - fixed the typo of the text converted from audio
 - no need to chunk the text file
 - use gpt index to handle the long text
+- USE https://github.com/ggerganov/whisper.cpp to run whisper local
